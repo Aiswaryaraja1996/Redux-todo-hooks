@@ -67,71 +67,10 @@ export default function TodoList ({ id, status, title, onToggle, onDelete , onEd
       >
         <div style={modalStyle} className={classes.paper}>
           <input type="text" placeholder="Task Name" onChange={(e)=>setTask(e.target.value)} />
-          <input type="submit" value="Change Task" onClick={()=>onEdit(task,id)}/>
+          <input type="submit" value="Change Task" onClick={()=>onEdit(task,id,status)}/>
         </div>
       </Modal>
     </div>
   );
 };
 
-// export default function TodoList() {
-//   const { todos, isError, isLoading } = useSelector(
-//     (state) => state,
-//     shallowEqual
-//   );
-//   const dispatch = useDispatch();
-
-//   const getTodos = () => {
-//     const requestAction = actions.getTodoRequest();
-//     dispatch(requestAction);
-
-//     return fetch("https://todos-mock-server.herokuapp.com/tasks")
-//       .then((res) => res.json())
-//       .then((res) => {
-//         console.log(res);
-//         const successAction = actions.getTodoSuccess(res);
-//         dispatch(successAction);
-//       })
-//       .catch((res) => {
-//         const failureAction = actions.getTodoFailure;
-//         dispatch(failureAction);
-//       });
-//   };
-
-//   useEffect(() => {
-//     getTodos();
-//   }, []);
-
-//   const handleToggle = (id) => {
-//     const toggleAction = actions.toggleTodo(id);
-//     dispatch(toggleAction);
-//   };
-
-//   const handleDelete = (id) => {
-//     const deleteAction = actions.deleteTodo(id);
-//     dispatch(deleteAction);
-//   };
-
-//   const handleEdit = (task,id) => {
-//       const editAction = actions.editTodo({title:task,status:false,id:id});
-//       dispatch(editAction);
-//   }
-
-//   return (
-//     <div>
-//       {isLoading && <h4>Loading...</h4>}
-//       {isError && <h4>Error! Something went wrong</h4>}
-//       {!isLoading &&
-//         !isError &&
-//         todos?.map((item) => (
-//           <TodoItem
-//             key={item.id}
-//             {...item}
-//             onDelete={handleDelete}
-//             onToggle={handleToggle}
-//             onEdit={handleEdit}
-//           />
-//         ))}
-//     </div>
-//   );
-// }

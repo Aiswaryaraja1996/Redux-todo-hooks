@@ -1,11 +1,12 @@
 import "./App.css";
-import Todo from "./todo/Todo";
+import { BrowserRouter } from "react-router-dom";
+import Allroutes from "./routes/Allroutes";
 
 function App() {
   return (
-    <div className="App">
-      <Todo />
-    </div>
+    <BrowserRouter>
+      <Allroutes />
+    </BrowserRouter>
   );
 }
 

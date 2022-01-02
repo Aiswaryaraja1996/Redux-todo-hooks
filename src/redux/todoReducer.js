@@ -5,7 +5,7 @@ const initialState = {
   isLoading: true,
   isError: false,
 };
-export default function Reducer(state = initialState, action) {
+export default function todoReducer(state = initialState, action) {
   switch (action.type) {
     case actionConstants.GET_TODO_REQUEST:
       return { ...state, isLoading: true };

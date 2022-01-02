@@ -9,7 +9,7 @@ export default function TodoInput() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { todos, isError, isLoading } = useSelector(
-    (state) => state,
+    (state) => state.todo,
     shallowEqual
   );
 
