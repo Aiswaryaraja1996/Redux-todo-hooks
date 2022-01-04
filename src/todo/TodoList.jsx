@@ -1,33 +1,35 @@
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
+// import Modal from "@material-ui/core/Modal";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
 
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+// function rand() {
+//   return Math.round(Math.random() * 20) - 10;
+// }
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
+// function getModalStyle() {
+//   const top = 50 + rand();
+//   const left = 50 + rand();
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: "absolute",
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
+//   return {
+//     top: `${top}%`,
+//     left: `${left}%`,
+//     transform: `translate(-${top}%, -${left}%)`,
+//   };
+// }
+
+// const useStyles = makeStyles((theme) => ({
+//   paper: {
+//     position: "absolute",
+//     width: 400,
+//     backgroundColor: theme.palette.background.paper,
+//     border: "2px solid #000",
+//     boxShadow: theme.shadows[5],
+//     padding: theme.spacing(2, 4, 3),
+//   },
+// }));
 
 export default function TodoList({
   id,
@@ -35,20 +37,20 @@ export default function TodoList({
   title,
   onToggle,
   onDelete,
-  onEdit,
+  // onEdit,
 }) {
   const dispatch = useDispatch();
-  const classes = useStyles();
-  const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(false);
-  const [task, setTask] = useState(null);
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const classes = useStyles();
+  // const [modalStyle] = useState(getModalStyle);
+  // const [open, setOpen] = useState(false);
+  // // const [task, setTask] = useState(null);
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <div
@@ -69,8 +71,10 @@ export default function TodoList({
         Toggle
       </button>
       <button onClick={() => dispatch(onDelete(id))}>Delete</button>
-      <button onClick={handleOpen}>Edit</button>
-      <Modal
+      {/* <button onClick={handleOpen}>Edit</button> */}
+      <Link to={`/todo/${id}`}> <button >Edit</button></Link>
+     
+      {/* <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
@@ -88,7 +92,7 @@ export default function TodoList({
             onClick={() => dispatch(onEdit(task, id, status))}
           />
         </div>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

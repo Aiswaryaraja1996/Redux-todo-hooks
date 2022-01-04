@@ -2,8 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../redux/action";
 import { Redirect } from "react-router-dom";
-// import Todo from "../todo/Todo";
-import { Link } from "react-router-dom";
+import Navbar from "../navbar/Navbar";
 
 function Login() {
   const [userName, setUserName] = React.useState(null);
@@ -31,21 +30,24 @@ function Login() {
     return <Redirect to="/todo" />;
   }
   return (
-    <div style={{textAlign: "center"}}>
-      <h3>Login Page</h3>
-      <input
-        type="text"
-        placeholder="Username"
-        onChange={(e) => setUserName(e.target.value)}
-      />
-      <br />
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br />
-      <button onClick={handleLogin}>Login</button>
+    <div>
+      <Navbar />
+      <div style={{ textAlign: "center" }}>
+        <h3>Login Page</h3>
+        <input
+          type="text"
+          placeholder="Username"
+          onChange={(e) => setUserName(e.target.value)}
+        />
+        <br />
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <br />
+        <button onClick={handleLogin}>Login</button>
+      </div>
     </div>
   );
 }

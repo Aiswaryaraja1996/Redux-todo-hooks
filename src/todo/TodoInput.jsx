@@ -5,7 +5,7 @@ import {
   handleDelete,
   handleToggle,
   handleSubmit,
-  handleEdit,
+  // handleEdit,
 } from "../redux/api";
 import TodoList from "./TodoList";
 
@@ -147,7 +147,7 @@ export default function TodoInput() {
               {...item}
               onDelete={handleDelete}
               onToggle={handleToggle}
-              onEdit={handleEdit}
+              // onEdit={handleEdit}
             />
           ))}
       </div>

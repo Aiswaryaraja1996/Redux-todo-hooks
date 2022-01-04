@@ -22,7 +22,7 @@ export const getTodos = (currentPage) => (dispatch) => {
 export const handleToggle = (id, status, title) => (dispatch) => {
   const requestAction = actions.getTodoRequest();
   dispatch(requestAction);
- 
+
   return fetch(`https://todos-mock-server.herokuapp.com/tasks/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
@@ -44,15 +44,14 @@ export const handleDelete = (id) => (dispatch) => {
     .then(() => dispatch(getTodos()));
 };
 
-export const handleEdit = (task, id, status) => (dispatch) => {
-  console.log(dispatch, task, id, status);
+export const handleEdit = (task, id) => (dispatch) => {
   const requestAction = actions.getTodoRequest();
   dispatch(requestAction);
 
   return fetch(`https://todos-mock-server.herokuapp.com/tasks/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ id, title: task, status: status }),
+    body: JSON.stringify({ id, title: task }),
   })
     .then((res) => res.json())
     .then(() => dispatch(getTodos()));
