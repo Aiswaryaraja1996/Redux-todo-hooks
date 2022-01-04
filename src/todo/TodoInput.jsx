@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
-import * as actions from "../redux/action";
+import {
+  getTodos,
+  handleDelete,
+  handleToggle,
+  handleSubmit,
+  handleEdit,
+} from "../redux/api";
 import TodoList from "./TodoList";
 
 export default function TodoInput() {
@@ -13,79 +19,89 @@ export default function TodoInput() {
     shallowEqual
   );
 
-  const getTodos = () => {
-    const requestAction = actions.getTodoRequest();
-    dispatch(requestAction);
+  // * getTodos
 
-    return fetch(
-      `https://todos-mock-server.herokuapp.com/tasks?_page=${currentPage}&_limit=3`
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        const successAction = actions.getTodoSuccess(res);
-        dispatch(successAction);
-      })
-      .catch((res) => {
-        const failureAction = actions.getTodoFailure;
-        dispatch(failureAction);
-      });
-  };
+  // const getTodos = () => {
+  //   const requestAction = actions.getTodoRequest();
+  //   dispatch(requestAction);
+
+  //   return fetch(
+  //     `https://todos-mock-server.herokuapp.com/tasks?_page=${currentPage}&_limit=3`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       console.log(res);
+  //       const successAction = actions.getTodoSuccess(res);
+  //       dispatch(successAction);
+  //     })
+  //     .catch((res) => {
+  //       const failureAction = actions.getTodoFailure;
+  //       dispatch(failureAction);
+  //     });
+  // };
 
   useEffect(() => {
-    getTodos();
+    dispatch(getTodos())
   }, [currentPage]);
 
-  const handleToggle = (id, status, title) => {
-    const requestAction = actions.getTodoRequest();
-    dispatch(requestAction);
+  //* handlToggle
 
-    return fetch(`https://todos-mock-server.herokuapp.com/tasks/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, title: title, status: !status }),
-    })
-      .then((res) => res.json())
-      .then((res) => getTodos());
-  };
+  // const handleToggle = (id, status, title) => {
+  //   const requestAction = actions.getTodoRequest();
+  //   dispatch(requestAction);
 
-  const handleDelete = (id) => {
-    const requestAction = actions.getTodoRequest();
-    dispatch(requestAction);
+  //   return fetch(`https://todos-mock-server.herokuapp.com/tasks/${id}`, {
+  //     method: "PATCH",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ id, title: title, status: !status }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => getTodos());
+  // };
 
-    return fetch(`https://todos-mock-server.herokuapp.com/tasks/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((res) => getTodos());
-  };
+  //* handleDelete
 
-  const handleEdit = (task, id, status) => {
-    const requestAction = actions.getTodoRequest();
-    dispatch(requestAction);
+  // const handleDelete = (id) => {
+  //   const requestAction = actions.getTodoRequest();
+  //   dispatch(requestAction);
 
-    return fetch(`https://todos-mock-server.herokuapp.com/tasks/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, title: task, status: status }),
-    })
-      .then((res) => res.json())
-      .then((res) => getTodos());
-  };
+  //   return fetch(`https://todos-mock-server.herokuapp.com/tasks/${id}`, {
+  //     method: "DELETE",
+  //     headers: { "Content-Type": "application/json" },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => getTodos());
+  // };
 
-  const handleSubmit = (task) => {
-    const requestAction = actions.getTodoRequest();
-    dispatch(requestAction);
+  //* handleEdit
 
-    return fetch("https://todos-mock-server.herokuapp.com/tasks", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: task, status: false }),
-    })
-      .then((res) => res.json())
-      .then((res) => getTodos());
-  };
+  // const handleEdit = (task, id, status) => {
+  //   const requestAction = actions.getTodoRequest();
+  //   dispatch(requestAction);
+
+  //   return fetch(`https://todos-mock-server.herokuapp.com/tasks/${id}`, {
+  //     method: "PATCH",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ id, title: task, status: status }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => getTodos());
+  // };
+
+  //* handleSubmit
+
+  // const handleSubmit = (task) => {
+  //   const requestAction = actions.getTodoRequest();
+  //   dispatch(requestAction);
+
+  //   return fetch("https://todos-mock-server.herokuapp.com/tasks", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ title: task, status: false }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => getTodos());
+  // };
 
   return (
     <div>
@@ -98,7 +114,7 @@ export default function TodoInput() {
       <input
         type="submit"
         value="ADD TASK"
-        onClick={() => handleSubmit(task)}
+        onClick={() => dispatch(handleSubmit(task))}
       />
       <div>
         {isLoading && <h4>Loading...</h4>}
